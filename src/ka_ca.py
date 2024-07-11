@@ -6,27 +6,6 @@ from confluent_kafka.serialization import StringSerializer, SerializationContext
 
 from src.json_parsing.model.users import Users
 
-from kafka import KafkaProducer
-
-
-def get_msg():
-    producer = KafkaProducer(
-        bootstrap_servers='harmless-llama-10955-eu2-kafka.upstash.io:9092',
-        sasl_mechanism='SCRAM-SHA-256',
-        security_protocol='SASL_SSL',
-        sasl_plain_username='aGFybWxlc3MtbGxhbWEtMTA5NTUkSWlsftAT5bb2G5AxTAXsG48EcNi8Pk20sDU',
-        sasl_plain_password='YzI5N2JhYzQtZGJjMi00YjJmLThjOTQtMTEwNzhiZjQ3MmNm'
-    )
-
-    try:
-        producer.send('test_msg', b'Hello from python')
-        producer.flush()
-        print("Message produced without Avro schema!")
-    except Exception as e:
-        print(f"Error producing message: {e}")
-    finally:
-        producer.close()
-
 
 def get_msg_json(user0: Users, valid: bool):
     schema = """
@@ -35,6 +14,7 @@ def get_msg_json(user0: Users, valid: bool):
       "name": "User",
       "namespace": "com.upstash",
       "fields": [
+        {"name":"valid","type":"boolean"},
         {"name": "gender", "type": "string"},
         {"name": "name", "type": {
           "type": "record",
@@ -112,6 +92,7 @@ def get_msg_json(user0: Users, valid: bool):
     }
     """
     user_dict = {
+        "valid": valid,
         "gender": user0.gender,
         "name": {
             "title": user0.name.title,
@@ -152,8 +133,7 @@ def get_msg_json(user0: Users, valid: bool):
             "large": user0.picture.large,
             "medium": user0.picture.medium,
             "thumbnail": user0.picture.thumbnail
-        },
-        "valid": valid
+        }
     }
 
 
