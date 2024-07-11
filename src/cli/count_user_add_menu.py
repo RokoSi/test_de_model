@@ -27,9 +27,8 @@ def count_user_add_menu(settings: Settings) -> bool:
                 users_result: Union[List[Users], bool] = pars_user(json_result)
                 if isinstance(users_result, list):
                     for user in users_result:
-                        pprint(user)
                         valid_pass: bool = validator_pass(user.login.password)
-                        if not get_msg_json(settings, user, valid_pass):               #!!!!!!
+                        if not get_msg_json(user, valid_pass):
                             print("Не получилось добавить пользователя")
                             return False
                         else:
@@ -38,7 +37,9 @@ def count_user_add_menu(settings: Settings) -> bool:
             else:
                 print("Не удалось получить данные")
                 return False
-        except TypeError:
+        except TypeError as te:
+            print(f"{te}")
             return False
-        except ValueError:
+        except ValueError as ve:
+            print(f"{ve}")
             print("введите число")

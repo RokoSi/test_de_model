@@ -52,7 +52,8 @@ def main_menu(settings: Settings):
                     action_menu()
             else:
                 print("Выбранная опция не поддерживается")
-        except ValueError:
+        except ValueError as ve:
+            print(f"{ve}")
             print("введите число")
 
 

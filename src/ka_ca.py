@@ -1,16 +1,34 @@
+
 from confluent_kafka import Producer
 from confluent_kafka.schema_registry import SchemaRegistryClient
 from confluent_kafka.schema_registry.avro import AvroSerializer
 from confluent_kafka.serialization import StringSerializer, SerializationContext, MessageField
-from kafka import KafkaProducer
+
 from src.json_parsing.model.users import Users
-from src.settings import Settings
+
+from kafka import KafkaProducer
 
 
+def get_msg():
+    producer = KafkaProducer(
+        bootstrap_servers='harmless-llama-10955-eu2-kafka.upstash.io:9092',
+        sasl_mechanism='SCRAM-SHA-256',
+        security_protocol='SASL_SSL',
+        sasl_plain_username='aGFybWxlc3MtbGxhbWEtMTA5NTUkSWlsftAT5bb2G5AxTAXsG48EcNi8Pk20sDU',
+        sasl_plain_password='YzI5N2JhYzQtZGJjMi00YjJmLThjOTQtMTEwNzhiZjQ3MmNm'
+    )
+
+    try:
+        producer.send('test_msg', b'Hello from python')
+        producer.flush()
+        print("Message produced without Avro schema!")
+    except Exception as e:
+        print(f"Error producing message: {e}")
+    finally:
+        producer.close()
 
 
-
-def get_msg_json(settings: Settings, user0: Users, valid_pass: bool):
+def get_msg_json(user0: Users, valid: bool):
     schema = """
     {
       "type": "record",
@@ -93,23 +111,6 @@ def get_msg_json(settings: Settings, user0: Users, valid_pass: bool):
       ]
     }
     """
-
-    schema_registry_client = SchemaRegistryClient({
-        'url': "https://harmless-llama-10955-eu2-rest-kafka.upstash.io/schema-registry",
-        'basic.auth.user.info': "********:********"
-    })
-
-    avro_serializer = AvroSerializer(schema_registry_client, schema)
-
-    string_serializer = StringSerializer('utf_8')
-
-    producer = Producer({'bootstrap.servers': 'harmless-llama-10955-eu2-kafka.upstash.io:9092',
-                         'sasl.mechanism': 'SCRAM-SHA-256',
-                         'security.protocol': 'SASL_SSL',
-                         'sasl.username': '********',
-                         'sasl.password': '********'
-                         })
-
     user_dict = {
         "gender": user0.gender,
         "name": {
@@ -125,7 +126,7 @@ def get_msg_json(settings: Settings, user0: Users, valid_pass: bool):
             "city": user0.location.city,
             "state": user0.location.state,
             "country": user0.location.country,
-            "postcode": user0.location.postcode,
+            "postcode": str(user0.location.postcode),
             "coordinates": {
                 "latitude": user0.location.coordinates.latitude,
                 "longitude": user0.location.coordinates.longitude
@@ -151,13 +152,30 @@ def get_msg_json(settings: Settings, user0: Users, valid_pass: bool):
             "large": user0.picture.large,
             "medium": user0.picture.medium,
             "thumbnail": user0.picture.thumbnail
-        }
+        },
+        "valid": valid
     }
 
-    user = dict(user=user_dict, favorite_number=42)
-    producer.produce(topic="YOUR_TOPIC",
+
+    schema_registry_client = SchemaRegistryClient({
+        'url': "https://harmless-llama-10955-eu2-rest-kafka.upstash.io/schema-registry",
+        'basic.auth.user.info': "aGFybWxlc3MtbGxhbWEtMTA5NTUkSWlsftAT5bb2G5AxTAXsG48EcNi8Pk20sDU:YzI5N2JhYzQtZGJjMi00YjJmLThjOTQtMTEwNzhiZjQ3MmNm"
+    })
+
+    avro_serializer = AvroSerializer(schema_registry_client, schema)
+
+    string_serializer = StringSerializer('utf_8')
+
+    producer = Producer({'bootstrap.servers': 'harmless-llama-10955-eu2-kafka.upstash.io:9092',
+                         'sasl.mechanism': 'SCRAM-SHA-256',
+                         'security.protocol': 'SASL_SSL',
+                         'sasl.username': 'aGFybWxlc3MtbGxhbWEtMTA5NTUkSWlsftAT5bb2G5AxTAXsG48EcNi8Pk20sDU',
+                         'sasl.password': 'YzI5N2JhYzQtZGJjMi00YjJmLThjOTQtMTEwNzhiZjQ3MmNm'
+                         })
+
+    producer.produce(topic="test_msg",
                      key=string_serializer("id"),
-                     value=avro_serializer(user, SerializationContext("test_msg", MessageField.VALUE)))
+                     value=avro_serializer(user_dict, SerializationContext("test_msg", MessageField.VALUE)))
 
     producer.flush()
     print("Message sent successfully")

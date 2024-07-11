@@ -3,6 +3,7 @@ import logging
 import os
 
 from cli import main_menu
+from src.ka_ca import get_msg, get_msg_json
 
 from src.settings import settings
 
@@ -22,7 +23,8 @@ logging.basicConfig(
 
 
 def main():
-
+    get_msg()
+    #get_msg_json()
     main_menu(settings)
 
 
