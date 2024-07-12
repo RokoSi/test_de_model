@@ -12,7 +12,6 @@ def get_msg_json(user_json: list):
     :param user_json: полученный пользователь
     """
     pprint(user_json)
-    print(type(user_json))
     producer = Producer({'bootstrap.servers': 'harmless-llama-10955-eu2-kafka.upstash.io:9092',
                          'sasl.mechanism': 'SCRAM-SHA-256',
                          'security.protocol': 'SASL_SSL',
