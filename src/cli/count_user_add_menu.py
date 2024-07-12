@@ -20,14 +20,13 @@ def count_user_add_menu(settings: Settings) -> bool:
             json_result: Union[list[dict[Any, Any]], bool] = get_users_url(
                 count_user, settings
             )
-            if isinstance(json_result, list):
-                valid_pass = validator_pass(json_result[0]['login']['password'])
-                json_result[0]['valid'] = valid_pass
-                get_msg_json(json_result)
-                return True
-            else:
-                print("Не удалось получить данные")
-                return False
+            for user in json_result:
+                valid_pass = validator_pass(user['login']['password'])
+                user['valid'] = valid_pass
+                get_msg_json(user)
+            return True
+
+
         except TypeError as te:
             print(f"{te}")
             return False
