@@ -1,11 +1,8 @@
 from pprint import pprint
-from typing import Union, Any, List
+from typing import Union, Any
 
-#from src.db_use.save_user import save_user
-from src.json_parsing import get_users_url, pars_user
-from src.json_parsing.model.users import Users
-from src.ka_ca import get_msg_json
-#from src.ka_ca import get_msg_json
+from src.get_user import get_users_url
+from src.producer import get_msg_json
 from src.settings import Settings
 from src.validators import validator_pass
 
@@ -24,15 +21,10 @@ def count_user_add_menu(settings: Settings) -> bool:
                 count_user, settings
             )
             if isinstance(json_result, list):
-                users_result: Union[List[Users], bool] = pars_user(json_result)
-                if isinstance(users_result, list):
-                    for user in users_result:
-                        valid_pass: bool = validator_pass(user.login.password)
-                        if not get_msg_json(user, valid_pass):
-                            print("Не получилось добавить пользователя")
-                            return False
-                        else:
-                            print("Пользователь успешно добавлен")
+                valid_pass = validator_pass(json_result[0]['login']['password'])
+                json_result[0]['valid'] = valid_pass
+                pprint(json_result)
+                get_msg_json(json_result)
                 return True
             else:
                 print("Не удалось получить данные")
