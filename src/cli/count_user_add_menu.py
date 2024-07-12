@@ -23,7 +23,6 @@ def count_user_add_menu(settings: Settings) -> bool:
             if isinstance(json_result, list):
                 valid_pass = validator_pass(json_result[0]['login']['password'])
                 json_result[0]['valid'] = valid_pass
-                pprint(json_result)
                 get_msg_json(json_result)
                 return True
             else:
