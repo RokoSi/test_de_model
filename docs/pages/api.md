@@ -4,7 +4,8 @@
 - [Documentation](https://randomuser.me/documentation)
 
 ### Example request
->get_query:
+
+> get_query:
 >```url
 >https://randomuser.me/api/
 >```

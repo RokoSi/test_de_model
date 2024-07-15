@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import logging
 import os
+
 from cli import main_menu
 from settings import settings
 
@@ -20,7 +21,6 @@ logging.basicConfig(
 
 
 def main():
-
     main_menu(settings)
 
 

@@ -1,6 +1,6 @@
 name: Main CI
 
-on: [push, pull_request]
+on: [ push, pull_request ]
 
 jobs:
   run_tests:
@@ -39,7 +39,7 @@ jobs:
           poetry run coverage run -m pytest .
           poetry run coverage html
           poetry run ruff check --fix .
-          
+
 
       - name: Run tests
         run: |

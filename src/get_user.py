@@ -1,7 +1,9 @@
 import json
 import logging
 from typing import Union, List, Dict
+
 import requests
+
 from settings import Settings
 
 log = logging.getLogger(__name__)

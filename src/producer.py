@@ -1,6 +1,8 @@
 import json
 from pprint import pprint
+
 from confluent_kafka import Producer
+
 from settings import settings
 
 

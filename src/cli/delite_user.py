@@ -1,4 +1,3 @@
-
 from src.settings import Settings
 from src.validators.validator_email import validator_email
 

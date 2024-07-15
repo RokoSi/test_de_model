@@ -1,14 +1,13 @@
 from typing import Callable, List, Dict
 
+from src.settings import Settings
+from .check_email import check_email
+from .count_user_add_menu import count_user_add_menu
 from .delite_user import delite_user
 from .exit_program import exit_program
 from .invalid_users import invalid_users
-from .count_user_add_menu import count_user_add_menu
-from .check_email import check_email
 from .update_param import update_param
 from .valid_user import valid_users
-from src.settings import Settings
-
 
 
 def main_menu(settings: Settings):
@@ -26,7 +25,7 @@ def main_menu(settings: Settings):
         "7. Выйти",
     ]
 
-    #create_db(settings)
+    # create_db(settings)
 
     choices_part_func: Dict[int, Callable] = {
         1: count_user_add_menu,

@@ -59,12 +59,12 @@ def update_param(settings: Settings) -> bool:
             return False
 
         update_functions: Dict[str, Callable] = {
-            "cities": 1,#update_param_table_cities_db,
-            "contact_details": 2,#update_param_table_contact_details_db,
-            "locations": 3,#update_param_table_locations_db,
-            "media_data": 4,#update_param_table_media_data_db,
-            "registration_data": 5,#update_param_table_registration_data_db,
-            "users": 6#update_param_table_users_db,
+            "cities": 1,  # update_param_table_cities_db,
+            "contact_details": 2,  # update_param_table_contact_details_db,
+            "locations": 3,  # update_param_table_locations_db,
+            "media_data": 4,  # update_param_table_media_data_db,
+            "registration_data": 5,  # update_param_table_registration_data_db,
+            "users": 6  # update_param_table_users_db,
         }
 
         if select_table[0] in update_functions:
