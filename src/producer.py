@@ -1,9 +1,7 @@
 import json
 from pprint import pprint
-
 from confluent_kafka import Producer
-
-from src.settings import settings
+from settings import settings
 
 
 def get_msg_json(user_json: list):

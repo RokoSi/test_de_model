@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 import logging
 import os
-
 from cli import main_menu
-
-from src.settings import settings
+from settings import settings
 
 log = logging.getLogger(__name__)
 

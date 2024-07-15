@@ -1,6 +1,4 @@
 from typing import Dict, List, Union
-
-#from src.db_use import get_users_db
 from src.settings import Settings
 
 
@@ -11,7 +9,7 @@ def invalid_users(settings: Settings) -> bool:
     :return: Ture - если удалось найти таких пользователй,
      False - если не удалось найти таких пользователей
     """
-    results: Union[List[Dict], bool] = list[True]#get_users_db(settings, False)
+    results: Union[List[Dict], bool] = list[True]  # get_users_db(settings, False)
     if isinstance(results, list):
         if results:
             for row in results:

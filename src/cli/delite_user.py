@@ -1,4 +1,4 @@
-#from src.db_use.user_update import del_user
+
 from src.settings import Settings
 from src.validators.validator_email import validator_email
 
@@ -11,7 +11,7 @@ def delite_user(settings: Settings) -> None:
     while True:
         email: str = str(input("введите email: "))
         if validator_email(email):
-            check_del = True#: bool = del_user(settings, email)
+            check_del = True
             if check_del:
                 print("Пользовать удален\n")
                 break

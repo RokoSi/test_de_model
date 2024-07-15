@@ -1,6 +1,4 @@
 from typing import Union, List, Dict
-
-#from src.db_use import get_users_db
 from src.settings import Settings
 
 
