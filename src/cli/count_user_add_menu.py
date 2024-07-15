@@ -20,11 +20,10 @@ def count_user_add_menu(settings: Settings) -> bool:
                 count_user, settings
             )
             for user in json_result:
-                valid_pass = validator_pass(user['login']['password'])
-                user['valid'] = valid_pass
+                valid_pass = validator_pass(user["login"]["password"])
+                user["valid"] = valid_pass
                 get_msg_json(user)
             return True
-
 
         except TypeError as te:
             print(f"{te}")
