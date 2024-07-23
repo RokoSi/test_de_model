@@ -1,6 +1,5 @@
 from typing import Callable, List, Dict
 
-from src.settings import Settings
 from .check_email import check_email
 from .count_user_add_menu import count_user_add_menu
 from .delite_user import delite_user
@@ -10,7 +9,7 @@ from .update_param import update_param
 from .valid_user import valid_users
 
 
-def main_menu(settings: Settings):
+def main_menu(settings):
     """
     Cli для взаимодействия с функционалом.
     :param settings: Данные для подключения к бд.

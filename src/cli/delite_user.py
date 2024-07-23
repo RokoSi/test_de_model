@@ -1,8 +1,7 @@
-from src.settings import Settings
-from src.validators.validator_email import validator_email
+from src.validators import validator_email
 
 
-def delite_user(settings: Settings) -> None:
+def delite_user(settings) -> None:
     """
     Удаление пользователя по email, если он валиден
     :param settings: Данные для подключения к бд

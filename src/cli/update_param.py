@@ -3,10 +3,10 @@ from typing import List, Dict, Union, Optional, Callable
 # from src.db_use.user_update import update_param_table_cities_db, update_param_table_contact_details_db, \
 #     update_param_table_locations_db, update_param_table_media_data_db, update_param_table_registration_data_db, \
 #     update_param_table_users_db
-from src.settings import Settings
 
 
-def update_param(settings: Settings) -> bool:
+
+def update_param(settings) -> bool:
     """
     Изменение параметров
     :param settings: Данные для подключения к бд

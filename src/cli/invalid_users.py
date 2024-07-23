@@ -1,9 +1,9 @@
 from typing import Dict, List, Union
 
-from src.settings import Settings
 
 
-def invalid_users(settings: Settings) -> bool:
+
+def invalid_users(settings) -> bool:
     """
     Получение не валидных пользователей и их вывод
     :param settings: Данные для подключения к бд

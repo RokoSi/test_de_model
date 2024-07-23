@@ -1,9 +1,11 @@
 import json
-from pprint import pprint
+import logging
 
 from confluent_kafka import Producer
 
 from settings import settings
+
+log = logging.getLogger(__name__)
 
 
 def get_msg_json(user_json: list):
@@ -11,7 +13,7 @@ def get_msg_json(user_json: list):
     Отправляет сообщения через kafka
     :param user_json: полученный пользователь
     """
-    pprint(user_json)
+
     producer = Producer(
         {
             "bootstrap.servers": "harmless-llama-10955-eu2-kafka.upstash.io:9092",
@@ -25,4 +27,5 @@ def get_msg_json(user_json: list):
 
     producer.produce(settings.topic, value=data_json)
     producer.flush()
+
     print("Message sent successfully")
