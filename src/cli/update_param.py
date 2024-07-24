@@ -1,9 +1,9 @@
 from typing import List, Dict, Union, Optional, Callable
 
+
 # from src.db_use.user_update import update_param_table_cities_db, update_param_table_contact_details_db, \
 #     update_param_table_locations_db, update_param_table_media_data_db, update_param_table_registration_data_db, \
 #     update_param_table_users_db
-
 
 
 def update_param(settings) -> bool:

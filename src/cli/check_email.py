@@ -1,5 +1,5 @@
 
-from validators import validator_email
+from ..validators import validator_email
 
 
 def check_email(settings) -> None:
@@ -9,7 +9,7 @@ def check_email(settings) -> None:
     """
     while True:
         email: str = str(input("введите email: "))
-        if validator_email (email):
+        if validator_email(email):
             if True:  # get_check_email(settings, email):
                 print("Пользователь есть в бд \n")
                 break

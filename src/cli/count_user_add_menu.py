@@ -1,9 +1,8 @@
 from typing import Union, Any
 
-from get_user import get_users_url
-from producer import get_msg_json
-from settings import Settings
-from validators import validator_pass
+from src.get_user import get_users_url
+from src.producer import get_msg_json
+from src.validators import validator_pass
 
 
 def count_user_add_menu(url: str, count_user: int = 0) -> bool:

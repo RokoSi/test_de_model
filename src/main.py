@@ -22,6 +22,7 @@ log = logging.getLogger(__name__)
 
 
 def main():
+
     i = 0
     while True:
         count_user_add_menu(settings.url, random.randint(1, 3))

@@ -1,8 +1,6 @@
 from typing import Union, List, Dict
 
 
-
-
 def valid_users(settings) -> bool:
     """
     Получение валидных пользователей и их вывод
