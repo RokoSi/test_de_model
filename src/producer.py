@@ -5,6 +5,11 @@ from confluent_kafka import Producer
 
 from settings import settings
 
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    datefmt='%d/%m/%Y %I:%M:%S %p',
+)
 log = logging.getLogger(__name__)
 
 
@@ -28,4 +33,4 @@ def get_msg_json(user_json: list):
     producer.produce(settings.topic, value=data_json)
     producer.flush()
 
-    print("Message sent successfully")
+    log.info("Message sent successfully")
